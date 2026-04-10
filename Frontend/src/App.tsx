@@ -10,10 +10,7 @@ import InsightsPage from "@/pages/insights";
 
 
 // --- Import or Define SpotifyEmbedPlayer here ---
-// (You can keep the definition in MusicPage and import it,
-// or move the component definition here or to its own file)
-import SpotifyEmbedPlayer from "@/components/SpotifyEmbedPlayer";
-
+import SpotifyEmbedPlayer from "@/components/ui/spotify-embed-player";
 // --------------------------------------------------
 
 
