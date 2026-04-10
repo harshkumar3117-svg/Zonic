@@ -18,8 +18,7 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 
 app.use(cors({
-  origin: frontend_uri, 
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  origin:["http://localhost:5173"], 
   credentials: true
 }));
 
@@ -42,7 +41,7 @@ app.get("/", (req, res) => {
 
 app.get("/login", (req, res) => {
   const state = uuidv4() //Secure random UUID like "550e8400-e29b-41d4-a716-446655440000" as Spotify requires a state parameter to prevent CSRF attacks.
-  res.cookie("spotify_auth_state", state, { httpOnly: true, secure: true, sameSite: "Lax" })
+  res.cookie("spotify_auth_state", state, { httpOnly: true, secure: true, sameSite: "none" })
   const scope = [
     "user-read-private",
     "user-read-email",

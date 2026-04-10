@@ -28,7 +28,7 @@ import { SavedTrackItem } from "../types/spotify";
 import { UserPlaylist } from "../types/spotify";
 
 // --- API Base URL ---
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ""
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 // --- Main Music Page Component ---
 function MusicPage() {
@@ -100,12 +100,13 @@ function MusicPage() {
       try {
         const headers = { Authorization: `Bearer ${accessToken}` }
         const [likedResponse, topTracksResponse, playlistsResponse] = await Promise.all([
-          axios.get<SavedTrackItem[]>(`${API_BASE_URL}/liked-songs`, { headers, params: { limit: 10 } }),
+          axios.get<SavedTrackItem[]>(`${API_BASE_URL}/liked-songs`, { headers, params: { limit: 10 },withCredentials: true }),
           axios.get<Track[]>(`${API_BASE_URL}/top-tracks`, {
             headers,
+            withCredentials: true,
             params: { limit: 10, time_range: "short_term" },
           }),
-          axios.get<UserPlaylist[]>(`${API_BASE_URL}/playlists`, { headers, params: { limit: 20 } }),
+          axios.get<UserPlaylist[]>(`${API_BASE_URL}/playlists`, { headers, params: { limit: 20 },withCredentials: true }),
         ])
         setLikedTracks(likedResponse.data.map((item) => item.track))
         setTopTracks(topTracksResponse.data)
@@ -171,6 +172,7 @@ function MusicPage() {
       const response = await axios.get(`${API_BASE_URL}/search`, {
         headers: { Authorization: `Bearer ${accessToken}` },
         params: { q: searchQuery },
+        withCredentials: true
       })
 
       setSearchResults(response.data.tracks || [])
@@ -202,6 +204,7 @@ function MusicPage() {
     try {
       const response = await axios.get(`${API_BASE_URL}/playlists/${playlistId}/tracks`, {
         headers: { Authorization: `Bearer ${accessToken}` },
+        withCredentials: true
       })
 
       setPlaylistTracks(response.data.tracks || [])

@@ -19,7 +19,8 @@ interface LyricsDisplayProps {
 }
 
 // Base URL for your backend API
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ""
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+console.log("API Base URL:", API_BASE_URL) // Debug log to verify the base URL
 
 export function LyricsDisplay({ trackName, artistName }: LyricsDisplayProps) {
   // State specifically for lyrics search
@@ -47,7 +48,7 @@ export function LyricsDisplay({ trackName, artistName }: LyricsDisplayProps) {
 
     try {
       const response = await axios.get<SearchResultItem[]>(`${API_BASE_URL}/api/search-lyrics`, {
-        params: { trackName, artistName },
+        params: { trackName, artistName }, withCredentials: true
       })
       setLyricsSearchResults(response.data)
       if (response.data.length === 0) {
