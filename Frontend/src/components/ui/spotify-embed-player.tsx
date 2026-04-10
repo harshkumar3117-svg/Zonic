@@ -1,3 +1,4 @@
+import type React from "react";
 interface SpotifyEmbedPlayerProps { trackUri: string | null; }
 const SpotifyEmbedPlayer: React.FC<SpotifyEmbedPlayerProps> = ({ trackUri }) => {
     if (!trackUri) {
