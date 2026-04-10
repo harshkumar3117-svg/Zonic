@@ -1,5 +1,6 @@
 # Zonic
-
+# i have use ngrok api because spotify does not suppot http url that why i go to ngrok api 
+if you use that website please also run ngrok 
 > My own music-app
 
 <!-- Optional: Add a screenshot or GIF demo here later -->
